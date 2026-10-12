@@ -33,7 +33,7 @@ let winner = "going";
 const messageElement = document.querySelector("#message");
 const boardElement = document.querySelector(".board");
 const sqrElement = document.querySelectorAll(".sqr");
-// const resetButtonElement = document.querySelector("#resetButton");
+const resetButtonElement = document.querySelector("#reset-btn");
 
 /*-------------------------------- Functions --------------------------------*/
 // play, fill cell, display message, computer choice,does any one won
@@ -43,7 +43,7 @@ const fillPlayerCell = (event) => {
   board[event.target.id] = "X";
   emptyCells = emptyCells.filter((cell) => cell != event.target.id);
   event.target.classList.add("disable-cell");
-  boardElement.classList.add("disable-cell");
+  boardElement.classList.add("disable-game");
 
   checkForWinner();
 
@@ -60,7 +60,8 @@ const computerChoice = () => {
   sqrElement[indexValue].textContent = "O";
   board[indexValue] = "O";
   emptyCells = emptyCells.filter((cell) => cell != indexValue);
-  boardElement.classList.remove("disable-cell");
+  boardElement.classList.remove("disable-game");
+  sqrElement[indexValue].classList.add("disable-cell");
   checkForWinner();
 };
 
@@ -89,10 +90,24 @@ const checkForWinner = () => {
   }
 };
 
+const resetGame = () => {
+  messageElement.textContent = "";
+  boardElement.classList.remove("disable-game");
+
+  for (let i = 0; i < board.length; i++) {
+    board[i] = "";
+    winner = "going";
+    emptyCells = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    sqrElement[i].textContent = "";
+    sqrElement[i].classList.remove("disable-cell");
+  }
+};
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 //  cells, reset button
 boardElement.addEventListener("click", checkForWinner);
+resetButtonElement.addEventListener("click", resetGame);
 
 for (let cell of sqrElement) {
   cell.addEventListener("click", fillPlayerCell);

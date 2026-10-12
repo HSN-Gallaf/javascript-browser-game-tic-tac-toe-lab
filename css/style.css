@@ -24,3 +24,18 @@ body {
     pointer-events: none;
     cursor: default;
 }
+
+#reset-btn {
+    background-color: darkslategray;
+    width: 100px;
+    height: 50px;
+    border: 0 none none;
+    border-radius: 10px;
+    color: white;
+}
+
+#reset-btn:hover {
+    background-color: rgb(70, 106, 106);
+    cursor: pointer;
+    transition: 5px;
+}
