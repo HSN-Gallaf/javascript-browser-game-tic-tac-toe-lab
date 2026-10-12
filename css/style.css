@@ -17,4 +17,10 @@ body {
   border: 3px solid black;
   font-size: 64px;
   text-align: center;
+  cursor: pointer;
+}
+
+.disable-cell, .disable-game {
+    pointer-events: none;
+    cursor: default;
 }
