@@ -61,10 +61,12 @@ const computerChoice = () => {
   board[indexValue] = "O";
   emptyCells = emptyCells.filter((cell) => cell != indexValue);
   boardElement.classList.remove("disable-cell");
+  checkForWinner();
 };
 
 const displayMesssage = () => {
-  boardElement.classList.add(".disable-game");
+  boardElement.classList.add("disable-game");
+
   if (winner === "player") messageElement.textContent = "You Win";
   else if (winner === "computer") messageElement.textContent = "You Lose";
   else if (winner === "tie") messageElement.textContent = "Tie";
@@ -74,11 +76,7 @@ const checkForWinner = () => {
   for (let compo of winningCambo) {
     const [a, b, c] = compo;
     if (board[a] && board[a] === board[b] && board[b] === board[c]) {
-      if (board[a] === "X") {
-        winner = "player";
-      } else if (board[a] === "O") {
-        winner = "computer";
-      }
+      winner = board[a] === "X" ? "player" : "computer";
       displayMesssage();
       return;
     }
